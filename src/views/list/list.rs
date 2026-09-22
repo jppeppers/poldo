@@ -23,9 +23,10 @@ impl ListView {
       button("SWITCH VIEWS").on_press(Message::NavigateToNewListView)
     ];
 
-    pane_grid(app, {
-
-    }).into()
+    Grid::with_children([
+      sidebar.into(),
+      view.into()
+    ]).into()
   }
 }
 
