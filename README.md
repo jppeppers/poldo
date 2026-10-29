@@ -1,3 +1,3 @@
-### Pol-do
+### Poldo
 
 A side project rust to-do app using [iced.rs](https://iced.rs/)
