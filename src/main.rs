@@ -3,7 +3,7 @@ mod list;
 mod test;
 
 use list::{List, views::ListView};
-use application::Message;
+use application::{Message, views::View, views::SettingsView};
 
 use iced::{self, color, Element, Theme};
 use iced::theme::Palette;
@@ -20,6 +20,7 @@ fn main() -> iced::Result {
 pub struct Todo {
   pub selected_list: Option<List>,
   pub lists: Vec<List>,
+  pub view: View,
 }
 
 impl Todo {
@@ -31,6 +32,7 @@ impl Todo {
         List::new(1, "List 2"),
         List::new(2, "List 3"),
       ],
+      view: View::List,
     }
   }
 
@@ -42,11 +44,25 @@ impl Todo {
       Message::SetSelectedList(list) => {
         self.selected_list = Some(list)
       }
+      Message::OpenSettings => {
+        self.view = View::Settings
+      }
     }
   }
 
   pub fn view(&self) -> Element<'_, Message> {
-    ListView::render(self)
+    match self.view {
+      View::List => {
+        ListView::render(self)
+      }
+      View::NewList => {
+        println!("New List Form!");
+        ListView::render(self)
+      }
+      View::Settings => {
+        SettingsView::render(self)
+      }
+    }
   }
 
   pub fn theme(&self) -> Theme {
@@ -55,12 +71,12 @@ impl Todo {
 
   pub fn panda_palette() -> Palette {
     Palette {
-      background: color!(0x2A2C2D),
+      background: color!(0x242526),
       text:       color!(0xE6E6E6),
       primary:    color!(0x45A9F9),
-      success:    color!(0x6FE7D2),
-      warning:    color!(0xFFCC95),
-      danger:     color!(0xFF4B82),
+      success:    color!(0x19F9D8),
+      warning:    color!(0xFFB86C),
+      danger:     color!(0xFF2C6D),
     }
   }
 }

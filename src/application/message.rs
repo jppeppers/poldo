@@ -6,4 +6,6 @@ pub enum Message {
   OpenNewListForm,
   // Set selected list
   SetSelectedList(List),
+  // Open settings modal
+  OpenSettings,
 }

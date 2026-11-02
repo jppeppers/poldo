@@ -5,6 +5,7 @@ use crate::Todo;
 use crate::application::Message;
 
 // External
+use iced::{self, Padding};
 use iced::widget::{
   Container, Column, button, container, row, text
 };
@@ -38,8 +39,21 @@ pub struct ActionsMenu {}
 impl ActionsMenu {
   pub fn render() -> Container<'static, Message> {
     container(row![
-      button("+ New Todo List")
-        .on_press(Message::OpenNewListForm)
+      container(
+        button("+ New Todo List")
+          .on_press(Message::OpenNewListForm)
+      ),
+      container(
+        button("Settings")
+          .on_press(Message::OpenSettings)
+      ).padding(
+        Padding {
+          top: 0.0,
+          right: 0.0,
+          bottom: 0.0,
+          left: 10.0,
+        }
+      )
     ])
       .style(container::bordered_box)
       .align_right(Fill)
