@@ -1,6 +1,5 @@
 mod application;
 mod list;
-mod test;
 
 use list::{List, views::ListView};
 use application::{Message, views::View, views::SettingsView};
@@ -13,7 +12,7 @@ fn main() -> iced::Result {
     Todo::new,
     Todo::update,
     Todo::view,
-  ).theme(Todo::theme).run()
+  ).antialiasing(false).theme(Todo::theme).run()
 }
 
 #[derive(Default)]
@@ -42,10 +41,17 @@ impl Todo {
         println!("Open New Form!")
       }
       Message::SetSelectedList(list) => {
+        self.view = View::List;
         self.selected_list = Some(list)
       }
       Message::OpenSettings => {
         self.view = View::Settings
+      }
+      Message::CloseSettings => {
+        self.view = View::List;
+      }
+      Message::Foo => {
+        println!("Foo Pressed!");
       }
     }
   }
@@ -66,7 +72,8 @@ impl Todo {
   }
 
   pub fn theme(&self) -> Theme {
-    Theme::custom("Panda", Self::panda_palette())
+    Theme::GruvboxDark
+    // Theme::custom("Panda", Self::panda_palette())
   }
 
   pub fn panda_palette() -> Palette {

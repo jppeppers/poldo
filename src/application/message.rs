@@ -8,4 +8,8 @@ pub enum Message {
   SetSelectedList(List),
   // Open settings modal
   OpenSettings,
+  // Close settings modal
+  CloseSettings,
+  // Foo (for testing elements)
+  Foo
 }

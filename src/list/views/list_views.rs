@@ -8,7 +8,7 @@ use crate::application::Message;
 use crate::application::views::{ActionsMenu, NavMenu};
 
 // External
-use iced::widget::{Column, button, column, container, row, text};
+use iced::widget::{Column, column, container, row, text};
 use iced::{Element, Length::Fill};
 
 #[derive(Default)]
